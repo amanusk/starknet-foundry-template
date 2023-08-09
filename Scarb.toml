@@ -1,0 +1,20 @@
+[package]
+name = "token_sender"
+version = "0.1.0"
+
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
+
+[[target.starknet-contract]]
+sierra = true
+casm=true
+
+[dependencies]
+starknet = "2.1.0"
+
+[tool.snforge]
+# exit_first = true
+
+[tool.sncast]
+account="__default__"
+network = "testnet"
+url = "http://192.168.1.45:5235"
