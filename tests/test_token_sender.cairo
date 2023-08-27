@@ -1,11 +1,11 @@
-use cheatcodes::PreparedContract;
+use snforge_std::{declare, PreparedContract, deploy, start_prank, PrintTrait, stop_prank};
+
 use starknet::{
     contract_address_const, get_block_info, ContractAddress, Felt252TryIntoContractAddress, TryInto,
     Into, OptionTrait, class_hash::Felt252TryIntoClassHash, get_caller_address,
     get_contract_address,
 };
 use starknet::storage_read_syscall;
-use forge_print::PrintTrait;
 
 // use token_sender::tests::test_utils::{assert_eq};
 

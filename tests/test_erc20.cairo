@@ -1,10 +1,13 @@
-use cheatcodes::PreparedContract;
 use starknet::{
     contract_address_const, get_block_info, ContractAddress, Felt252TryIntoContractAddress, TryInto,
     Into, OptionTrait, class_hash::Felt252TryIntoClassHash, get_caller_address,
     get_contract_address,
 };
 use starknet::storage_read_syscall;
+
+
+use snforge_std::{declare, PreparedContract, deploy, start_prank, PrintTrait};
+
 // use token_sender::tests::test_utils::{assert_eq};
 
 use array::{ArrayTrait, SpanTrait, ArrayTCloneImpl};
@@ -75,8 +78,8 @@ fn test_transfer() {
 }
 
 #[test]
-#[should_panic(expected: ('u256_sub Overflow', ''))]
-fn test_should_panic_transfer() {
+#[should_panic(expected: ('u256_sub Overflow', ))]
+fn should_panic_transfer() {
     let contract_address = setup();
     let erc20 = IERC20Dispatcher { contract_address };
 
