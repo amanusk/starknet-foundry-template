@@ -1,4 +1,4 @@
-use snforge_std::{declare, PreparedContract, deploy, start_prank, PrintTrait, stop_prank};
+use snforge_std::{declare, start_prank, PrintTrait, stop_prank, ContractClassTrait};
 
 use starknet::{
     contract_address_const, get_block_info, ContractAddress, Felt252TryIntoContractAddress, TryInto,
@@ -29,7 +29,7 @@ const SYMBOL: felt252 = 222;
 
 
 fn setup() -> (ContractAddress, ContractAddress) {
-    let class_hash = declare('MockERC20');
+    let erc20_class_hash = declare('MockERC20');
     // let account: ContractAddress = get_contract_address();
 
     let account: ContractAddress = contract_address_const::<1>();
@@ -43,16 +43,14 @@ fn setup() -> (ContractAddress, ContractAddress) {
     INITIAL_SUPPLY.serialize(ref calldata);
     account.serialize(ref calldata);
 
-    let prepared = PreparedContract { class_hash: class_hash, constructor_calldata: @calldata };
-    let erc20_address = deploy(prepared).unwrap();
+    let erc20_address = erc20_class_hash.deploy(@calldata).unwrap();
 
-    let class_hash = declare('TokenSender');
+    let token_sender_class_hash = declare('TokenSender');
     // let account: ContractAddress = get_contract_address();
 
     let mut calldata = ArrayTrait::new();
 
-    let prepared = PreparedContract { class_hash: class_hash, constructor_calldata: @calldata };
-    let token_sender_address = deploy(prepared).unwrap();
+    let token_sender_address = token_sender_class_hash.deploy(@calldata).unwrap();
 
     (erc20_address, token_sender_address)
 }

@@ -6,7 +6,10 @@ use starknet::{
 use starknet::storage_read_syscall;
 
 
-use snforge_std::{declare, PreparedContract, deploy, start_prank, PrintTrait};
+use snforge_std::{
+    declare, start_prank, PrintTrait, ContractClassTrait, spy_events, SpyOn, EventSpy, EventFetcher,
+    Event, event_name_hash, EventAssertions
+};
 
 // use token_sender::tests::test_utils::{assert_eq};
 
@@ -18,7 +21,7 @@ use box::BoxTrait;
 use integer::u256;
 
 use token_sender::erc20::mock_erc20::MockERC20;
-use token_sender::erc20::mock_erc20::MockERC20::{Event, Transfer};
+use token_sender::erc20::mock_erc20::MockERC20::{Transfer};
 use token_sender::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
 
 const NAME: felt252 = 111;
@@ -26,7 +29,7 @@ const SYMBOL: felt252 = 222;
 
 
 fn setup() -> ContractAddress {
-    let class_hash = declare('MockERC20');
+    let erc20_class_hash = declare('MockERC20');
     // let account: ContractAddress = get_contract_address();
 
     let account: ContractAddress = contract_address_const::<1>();
@@ -40,8 +43,7 @@ fn setup() -> ContractAddress {
     INITIAL_SUPPLY.serialize(ref calldata);
     account.serialize(ref calldata);
 
-    let prepared = PreparedContract { class_hash: class_hash, constructor_calldata: @calldata };
-    let contract_address = deploy(prepared).unwrap();
+    let contract_address = erc20_class_hash.deploy(@calldata).unwrap();
 
     contract_address
 }
@@ -78,7 +80,39 @@ fn test_transfer() {
 }
 
 #[test]
-#[should_panic(expected: ('u256_sub Overflow', ))]
+fn test_transfer_event() {
+    let contract_address = setup();
+    let erc20 = IERC20Dispatcher { contract_address };
+
+    let target_account: ContractAddress = contract_address_const::<2>();
+    let token_sender: ContractAddress = contract_address_const::<1>();
+    start_prank(contract_address, token_sender);
+
+    let mut spy = spy_events(SpyOn::One(contract_address));
+
+    let transfer_value: u256 = 100;
+    erc20.transfer(target_account, transfer_value);
+
+    let mut expected_data_transfer: Array<felt252> = array![];
+    token_sender.serialize(ref expected_data_transfer);
+    target_account.serialize(ref expected_data_transfer);
+    transfer_value.serialize(ref expected_data_transfer);
+
+    spy
+        .assert_emitted(
+            @array![
+                Event {
+                    from: contract_address,
+                    name: 'Transfer',
+                    keys: array![],
+                    data: expected_datatransfer
+                }
+            ]
+        );
+}
+
+#[test]
+#[should_panic(expected: ('u256_sub Overflow',))]
 fn should_panic_transfer() {
     let contract_address = setup();
     let erc20 = IERC20Dispatcher { contract_address };
