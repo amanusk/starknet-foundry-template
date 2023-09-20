@@ -105,7 +105,7 @@ fn test_transfer_event() {
                     from: contract_address,
                     name: 'Transfer',
                     keys: array![],
-                    data: expected_datatransfer
+                    data: expected_data_transfer
                 }
             ]
         );
