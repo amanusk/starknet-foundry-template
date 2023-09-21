@@ -54,11 +54,9 @@ mod MockERC20 {
         self.balances.write(recipient, initial_supply);
         self
             .emit(
-                Event::Transfer(
-                    Transfer {
-                        from: contract_address_const::<0>(), to: recipient, value: initial_supply
-                    }
-                )
+                Transfer {
+                    from: contract_address_const::<0>(), to: recipient, value: initial_supply
+                }
             );
     }
 
@@ -127,7 +125,7 @@ mod MockERC20 {
             assert(!recipient.is_zero(), 'ERC20: transfer to 0');
             self.balances.write(sender, self.balances.read(sender) - amount);
             self.balances.write(recipient, self.balances.read(recipient) + amount);
-            self.emit(Event::Transfer(Transfer { from: sender, to: recipient, value: amount }));
+            self.emit(Transfer { from: sender, to: recipient, value: amount });
         }
 
         fn spend_allowance(
@@ -147,7 +145,7 @@ mod MockERC20 {
         ) {
             assert(!spender.is_zero(), 'ERC20: approve from 0');
             self.allowances.write((owner, spender), amount);
-            self.emit(Event::Approval(Approval { owner, spender, value: amount }));
+            self.emit(Approval { owner, spender, value: amount });
         }
     }
 }
