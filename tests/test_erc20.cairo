@@ -93,20 +93,18 @@ fn test_transfer_event() {
     let transfer_value: u256 = 100;
     erc20.transfer(target_account, transfer_value);
 
-    let mut expected_data_transfer: Array<felt252> = array![];
-    token_sender.serialize(ref expected_data_transfer);
-    target_account.serialize(ref expected_data_transfer);
-    transfer_value.serialize(ref expected_data_transfer);
+    // let mut expected_data_transfer: Array<felt252> = array![];
+    // token_sender.serialize(ref expected_data_transfer);
+    // target_account.serialize(ref expected_data_transfer);
+    // transfer_value.serialize(ref expected_data_transfer);
 
     spy
         .assert_emitted(
             @array![
-                Event {
-                    from: contract_address,
-                    name: 'Transfer',
-                    keys: array![],
-                    data: expected_data_transfer
-                }
+                (
+                    contract_address,
+                    Transfer { from: token_sender, to: target_account, value: transfer_value }
+                )
             ]
         );
 }
