@@ -103,7 +103,11 @@ fn test_transfer_event() {
             @array![
                 (
                     contract_address,
-                    Transfer { from: token_sender, to: target_account, value: transfer_value }
+                    MockERC20::Event::Transfer(
+                        MockERC20::Transfer {
+                            from: token_sender, to: target_account, value: transfer_value
+                        }
+                    )
                 )
             ]
         );
