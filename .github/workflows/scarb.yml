@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: oftware-mansion/setup-scarb@v1
+      - uses: software-mansion/setup-scarb@v1
         with:
           scarb-version: "0.7.0"
       - uses: foundry-rs/setup-snfoundry@v1
