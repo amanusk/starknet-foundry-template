@@ -4,7 +4,7 @@ version = 1
 [[package]]
 name = "snforge_std"
 version = "0.1.0"
-source = "git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.8.3#cb05cb81cae9451a91e42a03af09e0457284b4de"
+source = "git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.10.1#2f1597fb724b7df3050468bd0e6a8a3a0e225001"
 
 [[package]]
 name = "token_sender"
