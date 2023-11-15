@@ -40,7 +40,7 @@ mod TokenSender {
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {
-        TokensSent: TokensSent, 
+        TokensSent: TokensSent,
     }
     #[derive(Drop, starknet::Event)]
     struct TokensSent {
@@ -50,7 +50,7 @@ mod TokenSender {
 
 
     #[constructor]
-    fn constructor(ref self: ContractState, ) {}
+    fn constructor(ref self: ContractState,) {}
 
     #[storage]
     struct Storage {}
