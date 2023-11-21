@@ -86,24 +86,9 @@ fn test_single_send() {
     let mut transfer_list = ArrayTrait::<TransferRequest>::new();
     transfer_list.append(request1);
 
-    let mut spy = spy_events(SpyOn::One(erc20_address));
-
-
     // need to also prang the token sender
     start_prank(token_sender_address, account);
     token_sender.multisend(erc20_address, transfer_list);
-
-    spy
-        .assert_emitted(
-            @array![
-                (
-                    erc20_address,
-                    MockERC20::Event::ERC20Event::Transfer(
-                            from: token_sender, to: token_sender_address, value: transfer_value
-                    )
-                )
-            ]
-        );
 
     let balance_after = erc20.balance_of(dest1);
     assert(balance_after == transfer_value, 'Balance should be > 0');

@@ -11,6 +11,7 @@ use snforge_std::{
     Event, event_name_hash, EventAssertions
 };
 
+
 use array::{ArrayTrait, SpanTrait, ArrayTCloneImpl};
 use result::ResultTrait;
 use serde::Serde;
@@ -20,7 +21,9 @@ use integer::u256;
 
 use token_sender::erc20::mock_erc20::MockERC20;
 
-// use token_sender::erc20::mock_erc20::MockERC20::{Event};
+use token_sender::erc20::mock_erc20::MockERC20::{Event::ERC20Event};
+use openzeppelin::token::erc20::ERC20Component;
+
 
 use token_sender::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
 
@@ -84,19 +87,19 @@ fn test_transfer_event() {
     let transfer_value: u256 = 100;
     erc20.transfer(target_account, transfer_value);
 
-// spy
-//     .assert_emitted(
-//         @array![
-//             (
-//                 contract_address,
-//                 MockERC20::Event::Transfer(
-//                     MockERC20::Transfer {
-//                         from: token_sender, to: target_account, value: transfer_value
-//                     }
-//                 )
-//             )
-//         ]
-//     );
+    spy
+        .assert_emitted(
+            @array![
+                (
+                    contract_address,
+                    MockERC20::Event::ERC20Event::Transfer(
+                        ERC20Component::Transfer {
+                            from: token_sender, to: token_sender_address, value: transfer_value
+                        }
+                    )
+                )
+            ]
+        );
 }
 
 #[test]
