@@ -18,7 +18,7 @@ source = "git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.11.0#546
 
 [[package]]
 name = "token_sender"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "openzeppelin",
  "snforge_std",
