@@ -8,7 +8,7 @@ use starknet::storage_read_syscall;
 
 use snforge_std::{
     declare, start_prank, PrintTrait, ContractClassTrait, spy_events, SpyOn, EventSpy, EventFetcher,
-    Event, event_name_hash, EventAssertions
+    Event, event_name_hash, EventAssertions, CheatTarget
 };
 
 
@@ -64,7 +64,7 @@ fn test_transfer() {
     let balance_before = erc20.balance_of(target_account);
     assert(balance_before == 0, 'Invalid balance');
 
-    start_prank(contract_address, 1.try_into().unwrap());
+    start_prank(CheatTarget::One(contract_address), 1.try_into().unwrap());
 
     let transfer_value: u256 = 100;
     erc20.transfer(target_account, transfer_value);
@@ -80,7 +80,7 @@ fn test_transfer_event() {
 
     let target_account: ContractAddress = contract_address_const::<2>();
     let token_sender: ContractAddress = contract_address_const::<1>();
-    start_prank(contract_address, token_sender);
+    start_prank(CheatTarget::All, token_sender);
 
     let mut spy = spy_events(SpyOn::One(contract_address));
 
@@ -113,7 +113,7 @@ fn should_panic_transfer() {
     let balance_before = erc20.balance_of(target_account);
     assert(balance_before == 0, 'Invalid balance');
 
-    start_prank(contract_address, 1.try_into().unwrap());
+    start_prank(CheatTarget::One(contract_address), 1.try_into().unwrap());
 
     let transfer_value: u256 = 1000000001;
 

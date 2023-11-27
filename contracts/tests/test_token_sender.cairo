@@ -1,4 +1,4 @@
-use snforge_std::{declare, start_prank, PrintTrait, stop_prank, ContractClassTrait};
+use snforge_std::{declare, start_prank, PrintTrait, stop_prank, ContractClassTrait, CheatTarget};
 
 use snforge_std::{
     spy_events, SpyOn, EventSpy, EventFetcher, Event, event_name_hash, EventAssertions
@@ -64,7 +64,7 @@ fn test_single_send() {
 
     assert(erc20.balance_of(account) == INITIAL_SUPPLY, 'Balance should be > 0');
 
-    start_prank(erc20_address, account);
+    start_prank(CheatTarget::One(erc20_address), account);
 
     let transfer_value: u256 = 100;
     erc20.approve(token_sender_address, transfer_value * 2);
@@ -72,7 +72,7 @@ fn test_single_send() {
     assert(
         erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not set'
     );
-    stop_prank(erc20_address);
+    stop_prank(CheatTarget::One(erc20_address));
 
     let balance = erc20.balance_of(account);
     'Balance'.print();
@@ -87,7 +87,7 @@ fn test_single_send() {
     transfer_list.append(request1);
 
     // need to also prang the token sender
-    start_prank(token_sender_address, account);
+    start_prank(CheatTarget::One(token_sender_address), account);
     token_sender.multisend(erc20_address, transfer_list);
 
     let balance_after = erc20.balance_of(dest1);
@@ -103,7 +103,7 @@ fn test_single_send_fuzz(transfer_value: u256) {
 
     assert(erc20.balance_of(account) == INITIAL_SUPPLY, 'Balance should be > 0');
 
-    start_prank(erc20_address, account);
+    start_prank(CheatTarget::One(erc20_address), account);
 
     let transfer_value: u256 = 100;
     erc20.approve(token_sender_address, transfer_value * 2);
@@ -111,7 +111,7 @@ fn test_single_send_fuzz(transfer_value: u256) {
     assert(
         erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not set'
     );
-    stop_prank(erc20_address);
+    stop_prank(CheatTarget::One(erc20_address));
 
     let balance = erc20.balance_of(account);
 
@@ -124,7 +124,7 @@ fn test_single_send_fuzz(transfer_value: u256) {
     transfer_list.append(request1);
 
     // need to also prang the token sender
-    start_prank(token_sender_address, account);
+    start_prank(CheatTarget::One(token_sender_address), account);
     token_sender.multisend(erc20_address, transfer_list);
 
     let balance_after = erc20.balance_of(dest1);
@@ -140,7 +140,7 @@ fn test_multisend() {
 
     assert(erc20.balance_of(account) == INITIAL_SUPPLY, 'Balance should be > 0');
 
-    start_prank(erc20_address, account);
+    start_prank(CheatTarget::One(erc20_address), account);
 
     let transfer_value: u256 = 100;
     erc20.approve(token_sender_address, transfer_value * 2);
@@ -148,7 +148,7 @@ fn test_multisend() {
     assert(
         erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not set'
     );
-    stop_prank(erc20_address);
+    stop_prank(CheatTarget::One(erc20_address));
 
     let balance = erc20.balance_of(account);
     'Balance'.print();
@@ -166,7 +166,7 @@ fn test_multisend() {
     transfer_list.append(request2);
 
     // need to also prang the token sender
-    start_prank(token_sender_address, account);
+    start_prank(CheatTarget::One(token_sender_address), account);
     token_sender.multisend(erc20_address, transfer_list);
 
     let balance_after = erc20.balance_of(dest1);
