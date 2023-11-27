@@ -11,7 +11,6 @@ use snforge_std::{
     Event, event_name_hash, EventAssertions
 };
 
-// use token_sender::tests::test_utils::{assert_eq};
 
 use array::{ArrayTrait, SpanTrait, ArrayTCloneImpl};
 use result::ResultTrait;
@@ -21,25 +20,22 @@ use box::BoxTrait;
 use integer::u256;
 
 use token_sender::erc20::mock_erc20::MockERC20;
-use token_sender::erc20::mock_erc20::MockERC20::{Transfer};
+
+use token_sender::erc20::mock_erc20::MockERC20::{Event::ERC20Event};
+use openzeppelin::token::erc20::ERC20Component;
+
+
 use token_sender::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
 
-const NAME: felt252 = 111;
-const SYMBOL: felt252 = 222;
+const INITIAL_SUPPLY: u256 = 1000000000;
 
 
 fn setup() -> ContractAddress {
     let erc20_class_hash = declare('MockERC20');
-    // let account: ContractAddress = get_contract_address();
 
     let account: ContractAddress = contract_address_const::<1>();
-    // let account: ContractAddress = get_contract_address();
-    let INITIAL_SUPPLY: u256 = 1000000000;
 
     let mut calldata = ArrayTrait::new();
-    NAME.serialize(ref calldata);
-    SYMBOL.serialize(ref calldata);
-    18.serialize(ref calldata);
     INITIAL_SUPPLY.serialize(ref calldata);
     account.serialize(ref calldata);
 
@@ -53,9 +49,7 @@ fn test_get_balance() {
     let contract_address = setup();
     let erc20 = IERC20Dispatcher { contract_address };
 
-    let INITIAL_SUPPLY: u256 = 1000000000;
     let account: ContractAddress = contract_address_const::<1>();
-    // let account: ContractAddress = get_contract_address();
 
     assert(erc20.balance_of(account) == INITIAL_SUPPLY, 'Balance should be > 0');
 }
@@ -93,18 +87,13 @@ fn test_transfer_event() {
     let transfer_value: u256 = 100;
     erc20.transfer(target_account, transfer_value);
 
-    // let mut expected_data_transfer: Array<felt252> = array![];
-    // token_sender.serialize(ref expected_data_transfer);
-    // target_account.serialize(ref expected_data_transfer);
-    // transfer_value.serialize(ref expected_data_transfer);
-
     spy
         .assert_emitted(
             @array![
                 (
                     contract_address,
-                    MockERC20::Event::Transfer(
-                        MockERC20::Transfer {
+                    ERC20Component::Event::Transfer(
+                        ERC20Component::Transfer {
                             from: token_sender, to: target_account, value: transfer_value
                         }
                     )

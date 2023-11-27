@@ -1,10 +1,16 @@
 use snforge_std::{declare, start_prank, PrintTrait, stop_prank, ContractClassTrait};
 
+use snforge_std::{
+    spy_events, SpyOn, EventSpy, EventFetcher, Event, event_name_hash, EventAssertions
+};
+
 use starknet::{
     contract_address_const, get_block_info, ContractAddress, Felt252TryIntoContractAddress, TryInto,
     Into, OptionTrait, class_hash::Felt252TryIntoClassHash, get_caller_address,
     get_contract_address,
 };
+
+
 use starknet::storage_read_syscall;
 
 // use token_sender::tests::test_utils::{assert_eq};
@@ -17,16 +23,14 @@ use box::BoxTrait;
 use integer::u256;
 
 use token_sender::erc20::mock_erc20::MockERC20;
-use token_sender::erc20::mock_erc20::MockERC20::{Event, Transfer};
+use token_sender::erc20::mock_erc20::MockERC20::{Event::ERC20Event};
 use token_sender::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
 
 use token_sender::token_sender::sender::{ITokenSenderDispatcher, ITokenSenderDispatcherTrait};
 use token_sender::token_sender::sender::TransferRequest;
 
 
-const NAME: felt252 = 111;
-const SYMBOL: felt252 = 222;
-
+const INITIAL_SUPPLY: u256 = 1000000000;
 
 fn setup() -> (ContractAddress, ContractAddress) {
     let erc20_class_hash = declare('MockERC20');
@@ -34,12 +38,8 @@ fn setup() -> (ContractAddress, ContractAddress) {
 
     let account: ContractAddress = contract_address_const::<1>();
     // let account: ContractAddress = get_contract_address();
-    let INITIAL_SUPPLY: u256 = 1000000000;
 
     let mut calldata = ArrayTrait::new();
-    NAME.serialize(ref calldata);
-    SYMBOL.serialize(ref calldata);
-    18.serialize(ref calldata);
     INITIAL_SUPPLY.serialize(ref calldata);
     account.serialize(ref calldata);
 
@@ -60,7 +60,6 @@ fn test_single_send() {
     let (erc20_address, token_sender_address) = setup();
     let erc20 = IERC20Dispatcher { contract_address: erc20_address };
 
-    let INITIAL_SUPPLY: u256 = 1000000000;
     let account: ContractAddress = contract_address_const::<1>();
 
     assert(erc20.balance_of(account) == INITIAL_SUPPLY, 'Balance should be > 0');
@@ -100,7 +99,6 @@ fn test_single_send_fuzz(transfer_value: u256) {
     let (erc20_address, token_sender_address) = setup();
     let erc20 = IERC20Dispatcher { contract_address: erc20_address };
 
-    let INITIAL_SUPPLY: u256 = 1000000000;
     let account: ContractAddress = contract_address_const::<1>();
 
     assert(erc20.balance_of(account) == INITIAL_SUPPLY, 'Balance should be > 0');
@@ -138,7 +136,6 @@ fn test_multisend() {
     let (erc20_address, token_sender_address) = setup();
     let erc20 = IERC20Dispatcher { contract_address: erc20_address };
 
-    let INITIAL_SUPPLY: u256 = 1000000000;
     let account: ContractAddress = contract_address_const::<1>();
 
     assert(erc20.balance_of(account) == INITIAL_SUPPLY, 'Balance should be > 0');
