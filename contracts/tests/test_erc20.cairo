@@ -74,6 +74,32 @@ fn test_transfer() {
 }
 
 #[test]
+#[fork(url: "https://starknet-testnet.public.blastapi.io", block_id: BlockId::Number(909567))]
+fn test_fork_transfer() {
+    let contract_address = 0x02Fb85CF4D5B127507e488DAFcA1b76752c70B9D809B9F27c4944C0970589cB4
+        .try_into()
+        .unwrap();
+    let erc20 = IERC20Dispatcher { contract_address };
+
+    let target_account: ContractAddress = contract_address_const::<2>();
+
+    let owner_account: ContractAddress = contract_address_const::<
+        0x00811364290b6a2d6f29a6679f232196ffaa47bcc75c321f53d7f2c84c503f04
+    >();
+
+    let balance_before = erc20.balance_of(target_account);
+    assert(balance_before == 0, 'Invalid balance');
+
+    start_prank(CheatTarget::One(contract_address), owner_account.try_into().unwrap());
+
+    let transfer_value: u256 = 100;
+    erc20.transfer(target_account, transfer_value);
+
+    let balance_after = erc20.balance_of(target_account);
+    assert(balance_after == transfer_value, 'No value transfered');
+}
+
+#[test]
 fn test_transfer_event() {
     let contract_address = setup();
     let erc20 = IERC20Dispatcher { contract_address };

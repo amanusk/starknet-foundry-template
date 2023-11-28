@@ -15,7 +15,7 @@ casm = true
 sierra = true
 casm = true
 build-external-contracts = [
-    "token_sender::TokenSender"
+    "token_sender::token_sender::sender::TokenSender"
 ]
 
 [tool.sncast]

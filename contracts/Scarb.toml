@@ -8,6 +8,8 @@ version = "0.2.0"
 sierra = true
 casm=true
 
+[lib]
+
 
 [dependencies]
 starknet = "2.3.1"
