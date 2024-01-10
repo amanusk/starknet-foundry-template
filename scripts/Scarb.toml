@@ -5,7 +5,7 @@ version = "0.1.0"
 [dependencies]
 starknet = "2.3.1"
 sncast_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.11.0" }
-token_sender = { path = "../contracts" }
+token_sender = { path = "../" }
 
 [lib]
 sierra = true

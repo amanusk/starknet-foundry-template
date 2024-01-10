@@ -4,8 +4,8 @@ use sncast_std::{
 use debug::PrintTrait;
 
 fn main() {
-    let max_fee = 1000000000000000;
-    let salt = 0x3;
+    let max_fee = 2000000000000000;
+    let salt = 0x4;
 
     // let declare_result = declare('TokenSender', Option::Some(max_fee));
     // 'Declared'.print();
