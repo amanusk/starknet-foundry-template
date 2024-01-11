@@ -13,4 +13,4 @@ jobs:
       - uses: foundry-rs/setup-snfoundry@v2
         with:
           starknet-foundry-version: "0.13.1"
-      - run: cd ./contracts && snforge test
+      - run: snforge test
