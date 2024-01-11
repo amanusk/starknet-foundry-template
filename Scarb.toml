@@ -13,8 +13,8 @@ casm=true
 
 [dependencies]
 starknet = "2.4.0"
-snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.11.0" }
-openzeppelin = { git = "https://github.com/openzeppelin/cairo-contracts" }
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.13.1" }
+openzeppelin = { git = "https://github.com/openzeppelin/cairo-contracts", tag = "v0.8.0"}
 
 
 
