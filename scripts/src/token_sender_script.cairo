@@ -8,6 +8,9 @@ fn main() {
     let salt = 0x4;
 
     let declare_result = declare('TokenSender', Option::Some(max_fee), Option::None);
+    let class_hash_felt: felt252 = declare_result.class_hash.into();
+
+    println!("Class hash: {}", class_hash_felt);
 
     let nonce = get_nonce('pending');
     let class_hash = declare_result.class_hash;
@@ -20,6 +23,7 @@ fn main() {
         Option::Some(nonce)
     );
 
-    'Deploy'.print();
-    deploy_result.contract_address.print();
+    let deploy_address_felt: felt252 = deploy_result.contract_address.into();
+
+    println!("Deployed to address: {}", deploy_address_felt);
 }

@@ -18,7 +18,12 @@ build-external-contracts = [
     "token_sender::token_sender::sender::TokenSender"
 ]
 
-[tool.sncast]
+[tool.sncast.testnet]
 account="__default__"
 network = "testnet"
 url = "http://192.168.1.45:5235"
+
+[tool.sncast.devnet]
+account="devnet-rs"
+network = "testnet"
+url = "http://127.0.0.1:5050"
