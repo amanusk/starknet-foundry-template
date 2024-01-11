@@ -74,7 +74,9 @@ fn test_transfer() {
 }
 
 #[test]
-#[fork(url: "https://starknet-testnet.public.blastapi.io", block_id: BlockId::Number(909567))]
+#[fork(
+    url: "https://starknet-testnet.public.blastapi.io/rpc/v0_6", block_id: BlockId::Number(909567)
+)]
 fn test_fork_transfer() {
     let contract_address = 0x02Fb85CF4D5B127507e488DAFcA1b76752c70B9D809B9F27c4944C0970589cB4
         .try_into()
