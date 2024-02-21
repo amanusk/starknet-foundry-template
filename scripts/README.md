@@ -1,7 +1,7 @@
 # Run script with sncast
 
 ```
-sncast --profile devnet-rs script token_sender_script
+sncast --profile devnet script token_sender_script
 ```
 
 # Manually with sncast

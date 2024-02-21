@@ -1,7 +1,6 @@
 use sncast_std::{
     declare, deploy, invoke, call, DeclareResult, DeployResult, InvokeResult, CallResult, get_nonce
 };
-use debug::PrintTrait;
 
 fn main() {
     let max_fee = 2000000000000000;

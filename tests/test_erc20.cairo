@@ -7,8 +7,8 @@ use starknet::storage_read_syscall;
 
 
 use snforge_std::{
-    declare, start_prank, PrintTrait, ContractClassTrait, spy_events, SpyOn, EventSpy, EventFetcher,
-    Event, event_name_hash, EventAssertions, CheatTarget
+    declare, start_prank, ContractClassTrait, spy_events, SpyOn, EventSpy, EventFetcher, Event,
+    event_name_hash, EventAssertions, CheatTarget
 };
 
 

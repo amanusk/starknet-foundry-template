@@ -1,4 +1,4 @@
-use snforge_std::{declare, start_prank, PrintTrait, stop_prank, ContractClassTrait, CheatTarget};
+use snforge_std::{declare, start_prank, stop_prank, ContractClassTrait, CheatTarget};
 
 use snforge_std::{
     spy_events, SpyOn, EventSpy, EventFetcher, Event, event_name_hash, EventAssertions
@@ -75,8 +75,7 @@ fn test_single_send() {
     stop_prank(CheatTarget::One(erc20_address));
 
     let balance = erc20.balance_of(account);
-    'Balance'.print();
-    balance.print();
+    println!("Balance {}", balance);
 
     // Send tokens via multisend
     let token_sender = ITokenSenderDispatcher { contract_address: token_sender_address };
@@ -151,8 +150,7 @@ fn test_multisend() {
     stop_prank(CheatTarget::One(erc20_address));
 
     let balance = erc20.balance_of(account);
-    'Balance'.print();
-    balance.print();
+    println!("Balance {}", balance);
 
     // Send tokens via multisend
     let token_sender = ITokenSenderDispatcher { contract_address: token_sender_address };

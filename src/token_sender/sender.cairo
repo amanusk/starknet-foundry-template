@@ -55,7 +55,7 @@ mod TokenSender {
     #[storage]
     struct Storage {}
 
-    #[external(v0)]
+    #[abi(embed_v0)]
     impl TokenSender of super::ITokenSender<ContractState> {
         fn multisend(
             self: @ContractState,

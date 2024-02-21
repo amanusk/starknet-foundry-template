@@ -12,16 +12,13 @@ casm=true
 
 
 [dependencies]
-starknet = "2.4.0"
-snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.13.1" }
-openzeppelin = { git = "https://github.com/openzeppelin/cairo-contracts", tag = "v0.8.0"}
+starknet = "2.5.0"
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.17.1" }
+openzeppelin = { git = "https://github.com/openzeppelin/cairo-contracts", tag = "v0.9.0"}
 
 
 
-[tool.snforge]
-# exit_first = true
-
-[tool.sncast]
-account="__default__"
+[profile.devnet]
+account="devnet-rs"
 network = "testnet"
-url = "http://192.168.1.45:5235"
+url = "http://127.0.0.1:5050"
