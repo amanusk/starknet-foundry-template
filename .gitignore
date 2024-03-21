@@ -2,3 +2,5 @@ target
 .DS_Store
 */.snfoundry_cache/**
 .snfoundry_cache/**
+
+profile.pb.gz

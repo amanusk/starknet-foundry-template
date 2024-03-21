@@ -7,8 +7,8 @@ use starknet::storage_read_syscall;
 
 
 use snforge_std::{
-    declare, start_prank, PrintTrait, ContractClassTrait, spy_events, SpyOn, EventSpy, EventFetcher,
-    Event, event_name_hash, EventAssertions, CheatTarget
+    declare, start_prank, ContractClassTrait, spy_events, SpyOn, EventSpy, EventFetcher, Event,
+    event_name_hash, EventAssertions, CheatTarget
 };
 
 
@@ -31,7 +31,7 @@ const INITIAL_SUPPLY: u256 = 1000000000;
 
 
 fn setup() -> ContractAddress {
-    let erc20_class_hash = declare('MockERC20');
+    let erc20_class_hash = declare("MockERC20");
 
     let account: ContractAddress = contract_address_const::<1>();
 
@@ -75,7 +75,7 @@ fn test_transfer() {
 
 #[test]
 #[fork(
-    url: "https://starknet-testnet.public.blastapi.io/rpc/v0_6", block_id: BlockId::Number(909567)
+    url: "https://starknet-testnet.public.blastapi.io/rpc/v0_7", block_id: BlockId::Number(909567)
 )]
 fn test_fork_transfer() {
     let contract_address = 0x02Fb85CF4D5B127507e488DAFcA1b76752c70B9D809B9F27c4944C0970589cB4
