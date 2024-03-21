@@ -33,7 +33,7 @@ use token_sender::token_sender::sender::TransferRequest;
 const INITIAL_SUPPLY: u256 = 1000000000;
 
 fn setup() -> (ContractAddress, ContractAddress) {
-    let erc20_class_hash = declare('MockERC20');
+    let erc20_class_hash = declare("MockERC20");
     // let account: ContractAddress = get_contract_address();
 
     let account: ContractAddress = contract_address_const::<1>();
@@ -45,7 +45,7 @@ fn setup() -> (ContractAddress, ContractAddress) {
 
     let erc20_address = erc20_class_hash.deploy(@calldata).unwrap();
 
-    let token_sender_class_hash = declare('TokenSender');
+    let token_sender_class_hash = declare("TokenSender");
     // let account: ContractAddress = get_contract_address();
 
     let mut calldata = ArrayTrait::new();
@@ -74,8 +74,8 @@ fn test_single_send() {
     );
     stop_prank(CheatTarget::One(erc20_address));
 
-    let balance = erc20.balance_of(account);
-    println!("Balance {}", balance);
+    let balance_before = erc20.balance_of(account);
+    println!("Balance {}", balance_before);
 
     // Send tokens via multisend
     let token_sender = ITokenSenderDispatcher { contract_address: token_sender_address };
@@ -111,8 +111,6 @@ fn test_single_send_fuzz(transfer_value: u256) {
         erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not set'
     );
     stop_prank(CheatTarget::One(erc20_address));
-
-    let balance = erc20.balance_of(account);
 
     // Send tokens via multisend
     let token_sender = ITokenSenderDispatcher { contract_address: token_sender_address };
