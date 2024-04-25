@@ -31,7 +31,7 @@ const INITIAL_SUPPLY: u256 = 1000000000;
 
 
 fn setup() -> ContractAddress {
-    let erc20_class_hash = declare("MockERC20");
+    let erc20_class_hash = declare("MockERC20").unwrap();
 
     let account: ContractAddress = contract_address_const::<1>();
 
@@ -39,7 +39,7 @@ fn setup() -> ContractAddress {
     INITIAL_SUPPLY.serialize(ref calldata);
     account.serialize(ref calldata);
 
-    let contract_address = erc20_class_hash.deploy(@calldata).unwrap();
+    let (contract_address, _) = erc20_class_hash.deploy(@calldata).unwrap();
 
     contract_address
 }
@@ -75,10 +75,10 @@ fn test_transfer() {
 
 #[test]
 #[fork(
-    url: "https://starknet-testnet.public.blastapi.io/rpc/v0_7", block_id: BlockId::Number(909567)
+    url: "https://starknet-sepolia.public.blastapi.io/rpc/v0_7", block_id: BlockId::Number(61804)
 )]
 fn test_fork_transfer() {
-    let contract_address = 0x02Fb85CF4D5B127507e488DAFcA1b76752c70B9D809B9F27c4944C0970589cB4
+    let contract_address = 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
         .try_into()
         .unwrap();
     let erc20 = IERC20Dispatcher { contract_address };
@@ -86,7 +86,7 @@ fn test_fork_transfer() {
     let target_account: ContractAddress = contract_address_const::<2>();
 
     let owner_account: ContractAddress = contract_address_const::<
-        0x00811364290b6a2d6f29a6679f232196ffaa47bcc75c321f53d7f2c84c503f04
+        0x04337e199aa6a8959aeb2a6afcd2f82609211104191a041e7b9ba2f4039768f0
     >();
 
     let balance_before = erc20.balance_of(target_account);

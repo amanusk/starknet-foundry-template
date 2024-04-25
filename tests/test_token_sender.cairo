@@ -33,7 +33,7 @@ use token_sender::token_sender::sender::TransferRequest;
 const INITIAL_SUPPLY: u256 = 1000000000;
 
 fn setup() -> (ContractAddress, ContractAddress) {
-    let erc20_class_hash = declare("MockERC20");
+    let erc20_class_hash = declare("MockERC20").unwrap();
     // let account: ContractAddress = get_contract_address();
 
     let account: ContractAddress = contract_address_const::<1>();
@@ -43,14 +43,14 @@ fn setup() -> (ContractAddress, ContractAddress) {
     INITIAL_SUPPLY.serialize(ref calldata);
     account.serialize(ref calldata);
 
-    let erc20_address = erc20_class_hash.deploy(@calldata).unwrap();
+    let (erc20_address, _) = erc20_class_hash.deploy(@calldata).unwrap();
 
-    let token_sender_class_hash = declare("TokenSender");
+    let token_sender_class_hash = declare("TokenSender").unwrap();
     // let account: ContractAddress = get_contract_address();
 
     let mut calldata = ArrayTrait::new();
 
-    let token_sender_address = token_sender_class_hash.deploy(@calldata).unwrap();
+    let (token_sender_address, _) = token_sender_class_hash.deploy(@calldata).unwrap();
 
     (erc20_address, token_sender_address)
 }
