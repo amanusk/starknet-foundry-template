@@ -3,10 +3,10 @@ use sncast_std::{
 };
 
 fn main() {
-    let max_fee = 2000000000000000;
+    let max_fee = 200000000000000000;
     let salt = 0x4;
 
-    let declare_result = declare('TokenSender', Option::Some(max_fee), Option::None);
+    let declare_result = declare("TokenSender", Option::Some(max_fee), Option::None).unwrap();
     let class_hash_felt: felt252 = declare_result.class_hash.into();
 
     println!("Class hash: {}", class_hash_felt);
@@ -20,7 +20,8 @@ fn main() {
         true,
         Option::Some(max_fee),
         Option::Some(nonce)
-    );
+    )
+        .unwrap();
 
     let deploy_address_felt: felt252 = deploy_result.contract_address.into();
 
