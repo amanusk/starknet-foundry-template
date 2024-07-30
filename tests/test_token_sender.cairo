@@ -1,6 +1,6 @@
 use snforge_std::{declare, cheat_caller_address, ContractClassTrait, CheatSpan};
 
-use snforge_std::{spy_events, SpyOn, EventSpy, EventFetcher, Event, EventAssertions};
+use snforge_std::{spy_events, EventSpyAssertionsTrait};
 
 use starknet::{
     contract_address_const, get_block_info, ContractAddress, Felt252TryIntoContractAddress, TryInto,

@@ -7,8 +7,8 @@ use starknet::storage_read_syscall;
 
 
 use snforge_std::{
-    declare, cheat_caller_address, ContractClassTrait, spy_events, SpyOn, EventSpy, EventFetcher,
-    Event, EventAssertions, CheatSpan
+    declare, cheat_caller_address, ContractClassTrait, CheatSpan, EventSpyAssertionsTrait,
+    spy_events
 };
 
 
@@ -113,7 +113,7 @@ fn test_transfer_event() {
 
     cheat_caller_address(contract_address, sender_account, CheatSpan::TargetCalls(1));
 
-    let mut spy = spy_events(SpyOn::One(contract_address));
+    let mut spy = spy_events();
 
     let transfer_value: u256 = 100;
     erc20.transfer(target_account, transfer_value);
