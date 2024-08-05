@@ -134,7 +134,7 @@ fn test_transfer_event() {
 }
 
 #[test]
-#[should_panic(expected: ('u256_sub Overflow',))]
+#[should_panic(expected: ('ERC20: insufficient balance',))]
 fn should_panic_transfer() {
     let contract_address = setup();
     let erc20 = IERC20Dispatcher { contract_address };

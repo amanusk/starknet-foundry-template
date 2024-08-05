@@ -66,26 +66,15 @@ mod TokenSender {
 
             let mut total_amount: u256 = 0;
 
-            let transfer_list = @transfer_list;
-            let mut index = 0;
-            loop {
-                if index == transfer_list.len() {
-                    break ();
-                }
-                total_amount += *transfer_list.at(index).amount;
-                index += 1;
+            for t in transfer_list.span() {
+                total_amount += *t.amount;
             };
 
             erc20.transfer_from(get_caller_address(), get_contract_address(), total_amount);
 
-            let mut index = 0;
-            loop {
-                if index == transfer_list.len() {
-                    break ();
-                }
-                erc20.transfer(*transfer_list.at(index).recipient, *transfer_list.at(index).amount);
-                index += 1;
-            };
+            for t in transfer_list.span() {
+                erc20.transfer(*t.recipient, *t.amount);
+            }
         }
     }
 }
