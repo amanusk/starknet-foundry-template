@@ -17,7 +17,7 @@ starknet = "2.7.0"
 openzeppelin = { git = "https://github.com/openzeppelin/cairo-contracts", rev = "eabfa02"}
 
 [dev-dependencies]
-snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.26.0" }
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.27.0" }
 
 
 
