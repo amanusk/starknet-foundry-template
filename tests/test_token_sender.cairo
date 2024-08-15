@@ -24,8 +24,8 @@ use token_sender::erc20::mock_erc20::MockERC20;
 use token_sender::erc20::mock_erc20::MockERC20::{Event::ERC20Event};
 use token_sender::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
 
-use token_sender::token_sender::sender::{ITokenSenderDispatcher, ITokenSenderDispatcherTrait};
-use token_sender::token_sender::sender::TransferRequest;
+use token_sender::token_sender::{ITokenSenderDispatcher, ITokenSenderDispatcherTrait};
+use token_sender::token_sender::TransferRequest;
 
 
 const INITIAL_SUPPLY: u256 = 1000000000;

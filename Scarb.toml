@@ -1,6 +1,6 @@
 [package]
 name = "token_sender"
-version = "0.4.0"
+version = "0.5.0"
 license-file = "LICENSE"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
@@ -13,9 +13,12 @@ casm=true
 
 
 [dependencies]
-starknet = "2.6.4"
+openzeppelin_token = "0.15.1"
+starknet = "2.7.0"
+
+[dev-dependencies]
 snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.27.0" }
-openzeppelin = { git = "https://github.com/openzeppelin/cairo-contracts", tag = "v0.10.0"}
+
 
 
 [cairo]

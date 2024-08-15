@@ -22,7 +22,7 @@ use integer::u256;
 use token_sender::erc20::mock_erc20::MockERC20;
 
 use token_sender::erc20::mock_erc20::MockERC20::{Event::ERC20Event};
-use openzeppelin::token::erc20::ERC20Component;
+use openzeppelin_token::erc20::ERC20Component;
 
 
 use token_sender::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
@@ -134,7 +134,7 @@ fn test_transfer_event() {
 }
 
 #[test]
-#[should_panic(expected: ('u256_sub Overflow',))]
+#[should_panic(expected: ('ERC20: insufficient balance',))]
 fn should_panic_transfer() {
     let contract_address = setup();
     let erc20 = IERC20Dispatcher { contract_address };

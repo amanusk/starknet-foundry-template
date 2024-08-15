@@ -6,4 +6,6 @@ target
 .snfoundry_trace/**
 profile/**
 
+.vscode/*
+
 profile.pb.gz
