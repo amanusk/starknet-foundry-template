@@ -22,7 +22,7 @@ use integer::u256;
 use token_sender::erc20::mock_erc20::MockERC20;
 
 use token_sender::erc20::mock_erc20::MockERC20::{Event::ERC20Event};
-use openzeppelin::token::erc20::ERC20Component;
+use openzeppelin_token::erc20::ERC20Component;
 
 
 use token_sender::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
