@@ -8,7 +8,7 @@ use starknet::storage_read_syscall;
 
 use snforge_std::{
     declare, cheat_caller_address, ContractClassTrait, CheatSpan, EventSpyAssertionsTrait,
-    spy_events
+    DeclareResultTrait, spy_events
 };
 
 
@@ -29,7 +29,7 @@ use token_sender::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
 
 
 fn setup() -> ContractAddress {
-    let erc20_class_hash = declare("MockERC20").unwrap();
+    let erc20_class_hash = declare("MockERC20").unwrap().contract_class();
 
     let account: ContractAddress = contract_address_const::<1>();
 
@@ -74,9 +74,7 @@ fn test_transfer() {
 }
 
 #[test]
-#[fork(
-    url: "https://starknet-sepolia.public.blastapi.io/rpc/v0_7", block_id: BlockId::Number(61804)
-)]
+#[fork(url: "https://starknet-sepolia.public.blastapi.io/rpc/v0_7", block_number: 61804)]
 fn test_fork_transfer() {
     let contract_address = 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
         .try_into()

@@ -1,6 +1,7 @@
-use snforge_std::{declare, cheat_caller_address, ContractClassTrait, CheatSpan};
+use snforge_std::{declare, cheat_caller_address, ContractClassTrait, CheatSpan, DeclareResultTrait};
 
 use snforge_std::{spy_events, EventSpyAssertionsTrait};
+use snforge_std::trace::get_call_trace;
 
 use starknet::{
     contract_address_const, get_block_info, ContractAddress, Felt252TryIntoContractAddress, TryInto,
@@ -31,7 +32,7 @@ use token_sender::token_sender::TransferRequest;
 const INITIAL_SUPPLY: u256 = 1000000000;
 
 fn setup() -> (ContractAddress, ContractAddress) {
-    let erc20_class_hash = declare("MockERC20").unwrap();
+    let erc20_class_hash = declare("MockERC20").unwrap().contract_class();
     // let account: ContractAddress = get_contract_address();
 
     let account: ContractAddress = contract_address_const::<1>();
@@ -43,7 +44,7 @@ fn setup() -> (ContractAddress, ContractAddress) {
 
     let (erc20_address, _) = erc20_class_hash.deploy(@calldata).unwrap();
 
-    let token_sender_class_hash = declare("TokenSender").unwrap();
+    let token_sender_class_hash = declare("TokenSender").unwrap().contract_class();
     // let account: ContractAddress = get_contract_address();
 
     let mut calldata = ArrayTrait::new();
@@ -88,6 +89,8 @@ fn test_single_send() {
 
     let balance_after = erc20.balance_of(dest1);
     assert(balance_after == transfer_value, 'Balance should be > 0');
+
+    println!("{}", get_call_trace());
 }
 
 #[test]
