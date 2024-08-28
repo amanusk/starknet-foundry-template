@@ -12,8 +12,6 @@ use starknet::{
 
 use starknet::storage_read_syscall;
 
-// use token_sender::tests::test_utils::{assert_eq};
-
 use array::{ArrayTrait, SpanTrait, ArrayTCloneImpl};
 use result::ResultTrait;
 use serde::Serde;

@@ -9,17 +9,13 @@ license-file = "LICENSE"
 sierra = true
 casm=true
 
-[lib]
-
 
 [dependencies]
 openzeppelin_token = "0.15.1"
 starknet = "2.7.0"
 
 [dev-dependencies]
-snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.28.0" }
-
-
+snforge_std = "0.28.0"
 
 [cairo]
 sierra-replace-ids = true
