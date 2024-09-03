@@ -5,7 +5,7 @@ use array::{ArrayTrait, SpanTrait};
 
 use debug::PrintTrait;
 
-use token_sender::erc20::erc20::{IERC20, IERC20Dispatcher, IERC20DispatcherTrait};
+use crate::erc20::erc20::{IERC20, IERC20Dispatcher, IERC20DispatcherTrait};
 
 /// TransferRequest struct
 #[derive(Drop, Serde, Copy)]

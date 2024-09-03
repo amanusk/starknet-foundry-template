@@ -3,9 +3,9 @@ version = 1
 
 [[package]]
 name = "openzeppelin_access"
-version = "0.15.1"
+version = "0.16.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:9c90539ab54d18253d656e58b75cd6334c76333e85a9e8758ba4091e53574c3c"
+checksum = "sha256:b9139449e53d715992b2d9e887c0c723d886419bee7ceb5561648c70bd6d3174"
 dependencies = [
  "openzeppelin_introspection",
  "openzeppelin_utils",
@@ -13,9 +13,9 @@ dependencies = [
 
 [[package]]
 name = "openzeppelin_account"
-version = "0.15.1"
+version = "0.16.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:a8959106a1223b8f47d4142ef636a1b44dcf16f6a7fc9ed1b071a3376d8ec6ee"
+checksum = "sha256:841bb881adbe98b64fee1dc1329f6e3fbabdfbd9fa65c66ffb54c55f13764bce"
 dependencies = [
  "openzeppelin_introspection",
  "openzeppelin_utils",
@@ -23,9 +23,9 @@ dependencies = [
 
 [[package]]
 name = "openzeppelin_governance"
-version = "0.15.1"
+version = "0.16.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:657045bcac71ce8eb4bf2cf3c69ff8e87f1b594d60cbaa1d0d5e581f47feb216"
+checksum = "sha256:a9d9c983cfd4369e7bbb69433fb264edf376805ed873b1f70a287825a6bd1eaf"
 dependencies = [
  "openzeppelin_access",
  "openzeppelin_introspection",
@@ -33,15 +33,15 @@ dependencies = [
 
 [[package]]
 name = "openzeppelin_introspection"
-version = "0.15.1"
+version = "0.16.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:f5f88a3f7fd81c1cb9acb0edeea1207baade23e2e4555e8487a5c8161e584827"
+checksum = "sha256:312bc2e531f036480ad7392dbb31042c38d875ef9dbb5578ea8de5c05e35b7d8"
 
 [[package]]
 name = "openzeppelin_token"
-version = "0.15.1"
+version = "0.16.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:ec1ee37dc2cda9c34a24cf17a775d4d68266496909ebb38afa6e6f610ebe6c6b"
+checksum = "sha256:7074c23fbc300b3cccff1037264dfdbe976fb11ae42ce687f4a8ce469adc552a"
 dependencies = [
  "openzeppelin_account",
  "openzeppelin_governance",
@@ -50,14 +50,24 @@ dependencies = [
 
 [[package]]
 name = "openzeppelin_utils"
-version = "0.15.1"
+version = "0.16.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:981ebd7ddfbd9fc03515fa7790ca41c8b721ea020412651510ab63e40ebd2303"
+checksum = "sha256:a494aeb5f1371db7f22e922196aa41d1d1698877a766a838350c0b6ffe49fda2"
+
+[[package]]
+name = "snforge_scarb_plugin"
+version = "0.1.0"
+source = "registry+https://scarbs.xyz/"
+checksum = "sha256:422f4a6c5d5fd30e2d27e325212191c1aa6dc063ce62b8ea6a27f11b51c35a71"
 
 [[package]]
 name = "snforge_std"
-version = "0.27.0"
-source = "git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.27.0#2d99b7c00678ef0363881ee0273550c44a9263de"
+version = "0.29.0"
+source = "registry+https://scarbs.xyz/"
+checksum = "sha256:1ca9d78c56888d36e8f080b19ffb41a09c9785e865637dd9cf172f6d2d0164a9"
+dependencies = [
+ "snforge_scarb_plugin",
+]
 
 [[package]]
 name = "token_sender"
