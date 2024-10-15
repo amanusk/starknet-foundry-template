@@ -5,8 +5,8 @@
 Simple template of a Cairo contract built using Starknet-Foundry
 The example shows a simple multi-send contract, receiving an ERC20 address, and a list of recipients, and sends tokens to recipients according to the list
 
-This repo requires `Scarb 2.7.1`
-This repo requires `sn-foundery 0.28.0`
+This repo requires `Scarb 2.8.4`
+This repo requires `sn-foundery 0.31.0`
 
 Install Scarb with:
 
