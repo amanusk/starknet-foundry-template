@@ -11,11 +11,11 @@ casm=true
 
 
 [dependencies]
-openzeppelin_token = "0.16.0"
-starknet = "2.7.0"
+openzeppelin_token = "0.18.0"
+starknet = "2.8.0"
 
 [dev-dependencies]
-snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.30.0" }
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.32.0" }
 
 [cairo]
 unstable-add-statements-code-locations-debug-info = true
