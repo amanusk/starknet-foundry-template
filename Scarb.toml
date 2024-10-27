@@ -1,7 +1,6 @@
 [package]
 name = "token_sender"
 version = "0.4.0"
-license-file = "LICENSE"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
 
@@ -13,7 +12,7 @@ casm=true
 
 
 [dependencies]
-starknet = "2.6.4"
+starknet = "2.6.3"
 snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.25.0" }
 openzeppelin = { git = "https://github.com/openzeppelin/cairo-contracts", tag = "v0.10.0"}
 
@@ -25,3 +24,6 @@ sierra-replace-ids = true
 account="devnet-rs"
 network = "testnet"
 url = "http://127.0.0.1:5050"
+
+[tool.voyager]
+my_contract = { path = "token_sender/sender.cairo" }
