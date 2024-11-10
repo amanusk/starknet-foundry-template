@@ -1,11 +1,6 @@
-[sncast.testnet]
-account="__default__"
-network = "testnet"
-url = "http://192.168.1.45:5235"
-
 [sncast.sepolia]
-keystore="/home/amanusk/starkli-accounts/sepolia/sepolia-keystore.json"
-account="/home/amanusk/starkli-accounts/sepolia/sepolia-account.json"
+keystore="/home/amanusk/.starkli-accounts/sepolia/sepolia-braavos.json"
+account="/home/amanusk/.starkli-accounts/sepolia/sepolia-braavos-signer.json"
 network = "sepolia"
 url = "http://192.168.1.45:9235"
 
