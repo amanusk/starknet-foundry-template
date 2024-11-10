@@ -5,6 +5,7 @@ target
 .snfoundry_versioned_programs/**
 .snfoundry_trace/**
 profile/**
+snfoundry_trace/
 
 .vscode/*
 
