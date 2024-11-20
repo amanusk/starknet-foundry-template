@@ -2,37 +2,57 @@
 version = 1
 
 [[package]]
-name = "openzeppelin_account"
-version = "0.18.0"
+name = "openzeppelin_access"
+version = "0.17.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:83e6571cac4c67049c8d0ab4e3c7ad146d582d7605e7354248835833e1d26c4a"
+checksum = "sha256:541bb8fdf1ad17fe0d275b00acb9f0d7f56ea5534741e21535ac3fda2c600281"
 dependencies = [
  "openzeppelin_introspection",
  "openzeppelin_utils",
+]
+
+[[package]]
+name = "openzeppelin_account"
+version = "0.17.0"
+source = "registry+https://scarbs.xyz/"
+checksum = "sha256:c4e11609fdd1f4c3d3004cd1468711bd2ea664739c9e59a4b270567fe4c23ee3"
+dependencies = [
+ "openzeppelin_introspection",
+ "openzeppelin_utils",
+]
+
+[[package]]
+name = "openzeppelin_governance"
+version = "0.17.0"
+source = "registry+https://scarbs.xyz/"
+checksum = "sha256:b7e0142d88d69a8c367aea8c9dc7f659f27372551efc23f39a0cf71a189c1302"
+dependencies = [
+ "openzeppelin_access",
+ "openzeppelin_introspection",
 ]
 
 [[package]]
 name = "openzeppelin_introspection"
-version = "0.18.0"
+version = "0.17.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:46c4cc6c95c9baa4c7d5cc0ed2bdaf334f46c25a8c92b3012829fff936e3042b"
+checksum = "sha256:892433a4a1ea0fc9cf7cdb01e06ddc2782182abcc188e4ea5dd480906d006cf8"
 
 [[package]]
 name = "openzeppelin_token"
-version = "0.18.0"
+version = "0.17.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:eafbe13f6a0487ce212459e25a81ae07f340ba76208ad4616626eb2d25a9625e"
+checksum = "sha256:77997a7e217b69674c34b402dc0c7b2210540db66a56087572679c31896eaabb"
 dependencies = [
  "openzeppelin_account",
+ "openzeppelin_governance",
  "openzeppelin_introspection",
- "openzeppelin_utils",
 ]
 
 [[package]]
 name = "openzeppelin_utils"
-version = "0.18.0"
+version = "0.17.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:725b212839f3eddc32791408609099c5e808c167ca0cf331d8c1d778b07a4e21"
+checksum = "sha256:36d93e353f42fd6b824abcd8b4b51c3f5d02c893c5f886ae81403b0368aa5fde"
 
 [[package]]
 name = "snforge_scarb_plugin"
