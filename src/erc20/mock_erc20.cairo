@@ -1,5 +1,5 @@
 #[starknet::contract]
-mod MockERC20 {
+pub mod MockERC20 {
     use openzeppelin_token::erc20::{ERC20Component, ERC20HooksEmptyImpl};
     use starknet::ContractAddress;
 
