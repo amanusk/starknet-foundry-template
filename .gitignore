@@ -10,3 +10,4 @@ snfoundry_trace/
 .vscode/*
 
 profile.pb.gz
+coverage
