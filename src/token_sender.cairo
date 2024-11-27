@@ -1,23 +1,16 @@
-use starknet::{
-    get_caller_address, contract_address_const, ContractAddress, get_contract_address, Into
-};
-use array::{ArrayTrait, SpanTrait};
-
-use debug::PrintTrait;
-
-use crate::erc20::erc20::{IERC20, IERC20Dispatcher, IERC20DispatcherTrait};
+use starknet::{ContractAddress};
 
 /// TransferRequest struct
 #[derive(Drop, Serde, Copy)]
-struct TransferRequest {
+pub struct TransferRequest {
     /// Recipient address
-    recipient: ContractAddress,
+    pub recipient: ContractAddress,
     /// Amount to transfer
-    amount: u256,
+    pub amount: u256,
 }
 
 #[starknet::interface]
-trait ITokenSender<TContractState> {
+pub trait ITokenSender<TContractState> {
     /// Multisend function
     /// # Arguments
     /// - `token_address` - The address of the token contract
@@ -28,17 +21,10 @@ trait ITokenSender<TContractState> {
 }
 
 #[starknet::contract]
-mod TokenSender {
-    use starknet::{
-        get_caller_address, contract_address_const, ContractAddress, get_contract_address, Into
-    };
+pub mod TokenSender {
+    use starknet::{get_caller_address, ContractAddress, get_contract_address};
 
-    use zeroable::Zeroable;
-    use array::{ArrayTrait, SpanTrait};
-
-    use token_sender::erc20::erc20::{IERC20, IERC20Dispatcher, IERC20DispatcherTrait};
-
-    use debug::PrintTrait;
+    use crate::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
 
     use super::TransferRequest;
 
