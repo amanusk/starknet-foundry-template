@@ -3,27 +3,22 @@ name = "token_sender"
 version = "0.5.0"
 license-file = "LICENSE"
 
-# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifes
 
 [[target.starknet-contract]]
 sierra = true
-casm=true
+casm=false
 
 
 [dependencies]
-openzeppelin_token = "0.18.0"
+openzeppelin_token = "0.19.0"
 starknet = "2.8.0"
 
 [dev-dependencies]
-snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.32.0" }
+snforge_std = "0.33.0"
 
 [cairo]
 unstable-add-statements-code-locations-debug-info = true
 unstable-add-statements-functions-debug-info = true
 inlining-strategy = "avoid"
 
-
-[profile.devnet]
-account="devnet-rs"
-network = "testnet"
-url = "http://127.0.0.1:5050"
