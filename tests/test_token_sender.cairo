@@ -58,7 +58,7 @@ fn test_single_send() {
     // Send tokens via multisend
     let token_sender = ITokenSenderDispatcher { contract_address: token_sender_address };
     let dest1: ContractAddress = contract_address_const::<2>();
-    let request1 = TransferRequest { recipient: dest1, amount: transfer_value };
+    let request1 = TransferRequest { recipient: dest1, amount: transfer_value * 8 };
 
     let mut transfer_list = ArrayTrait::<TransferRequest>::new();
     transfer_list.append(request1);
