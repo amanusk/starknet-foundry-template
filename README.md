@@ -2,11 +2,11 @@
 
 # Starknet-Foundry template ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/amanusk/starknet-foundry-template/blob/main/LICENSE) ![example workflow](https://github.com/amanusk/starknet-foundry-template/actions/workflows/scarb.yml/badge.svg)
 
-Simple template of a Cairo contract built using Starknet-Foundry
-The example shows a simple multi-send contract, receiving an ERC20 address, and a list of recipients, and sends tokens to recipients according to the list
+Simple template of a Cairo contract built using Starknet-Foundry.  
+The example shows a simple multi-send contract, receiving an ERC20 address, and a list of recipients, and sends tokens to recipients according to the list  
+This showcases using fork tests and fuzz tests, as well as a simple CI configuration.  
 
 - This repo requires `Scarb 2.9.1`
-
 - This repo requires `sn-foundry 0.34.0`
 
 Install Scarb with:
