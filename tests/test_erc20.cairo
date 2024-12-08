@@ -58,7 +58,7 @@ fn test_transfer() {
 }
 
 #[test]
-#[fork(url: "https://starknet-sepolia.public.blastapi.io/rpc/v0_7", block_number: 61804)]
+#[fork("SEPOLIA_LATEST", block_number: 61804)]
 fn test_fork_transfer() {
     let contract_address = 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
         .try_into()
