@@ -23,3 +23,8 @@ unstable-add-statements-code-locations-debug-info = true
 unstable-add-statements-functions-debug-info = true
 inlining-strategy = "avoid"
 
+
+[[tool.snforge.fork]]
+name = "SEPOLIA_LATEST"
+url = "https://starknet-sepolia.public.blastapi.io/rpc/v0_7"
+block_id.tag = "latest"
