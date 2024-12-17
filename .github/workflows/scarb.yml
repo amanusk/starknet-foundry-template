@@ -8,11 +8,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: rustup toolchain install stable --profile minimal
-      - uses: Swatinem/rust-cache@v2
       - uses: software-mansion/setup-scarb@v1
         with:
           scarb-version: "2.9.1"
+          scarb-lock: ./Scarb.lock
+
       - uses: foundry-rs/setup-snfoundry@v3
         with:
-          starknet-foundry-version: "0.34.0"
+          starknet-foundry-version: "0.35.0"
       - run: snforge test
