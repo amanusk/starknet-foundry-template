@@ -1,4 +1,4 @@
-use starknet::{ContractAddress};
+use starknet::ContractAddress;
 
 /// TransferRequest struct
 #[derive(Drop, Serde, Copy)]
@@ -16,16 +16,16 @@ pub trait ITokenSender<TContractState> {
     /// - `token_address` - The address of the token contract
     /// - `transfer_list` - The list of transfers to perform
     fn multisend(
-        self: @TContractState, token_address: ContractAddress, transfer_list: Array<TransferRequest>
+        self: @TContractState,
+        token_address: ContractAddress,
+        transfer_list: Array<TransferRequest>,
     ) -> ();
 }
 
 #[starknet::contract]
 pub mod TokenSender {
-    use starknet::{get_caller_address, ContractAddress, get_contract_address};
-
+    use starknet::{ContractAddress, get_caller_address, get_contract_address};
     use crate::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
-
     use super::TransferRequest;
 
 
@@ -42,7 +42,7 @@ pub mod TokenSender {
 
 
     #[constructor]
-    fn constructor(ref self: ContractState,) {}
+    fn constructor(ref self: ContractState) {}
 
     #[storage]
     struct Storage {}
@@ -52,7 +52,7 @@ pub mod TokenSender {
         fn multisend(
             self: @ContractState,
             token_address: ContractAddress,
-            transfer_list: Array<TransferRequest>
+            transfer_list: Array<TransferRequest>,
         ) {
             let erc20 = IERC20Dispatcher { contract_address: token_address };
 
