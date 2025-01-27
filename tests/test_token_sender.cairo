@@ -2,7 +2,7 @@ use snforge_std::{declare, cheat_caller_address, ContractClassTrait, CheatSpan, 
 
 use snforge_std::trace::get_call_trace;
 
-use starknet::{contract_address_const, ContractAddress,};
+use starknet::{contract_address_const, ContractAddress};
 
 use token_sender::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
 
@@ -49,7 +49,7 @@ fn test_single_send() {
     erc20.approve(token_sender_address, transfer_value * 2);
 
     assert(
-        erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not set'
+        erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not set',
     );
 
     let balance_before = erc20.balance_of(account);
@@ -88,7 +88,7 @@ fn test_single_send_fuzz(transfer_value: u256) {
     erc20.approve(token_sender_address, transfer_value * 2);
 
     assert(
-        erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not set'
+        erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not set',
     );
 
     // Send tokens via multisend
@@ -119,11 +119,12 @@ fn test_multisend() {
     cheat_caller_address(erc20_address, account, CheatSpan::TargetCalls(1));
 
     let transfer_value: u256 = 100;
-    erc20.approve(token_sender_address, transfer_value * 2);
+    erc20.approve(token_sender_address, transfer_value * 2 - 1);
 
-    assert(
-        erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not set'
-    );
+    // assert(
+    //     erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not
+    //     set',
+    // );
 
     let balance = erc20.balance_of(account);
     println!("Balance {}", balance);

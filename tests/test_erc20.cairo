@@ -1,9 +1,9 @@
-use starknet::{contract_address_const, ContractAddress,};
+use starknet::{contract_address_const, ContractAddress};
 
 
 use snforge_std::{
     declare, cheat_caller_address, ContractClassTrait, CheatSpan, EventSpyAssertionsTrait,
-    DeclareResultTrait, spy_events
+    DeclareResultTrait, spy_events,
 };
 
 
@@ -68,14 +68,14 @@ fn test_fork_transfer() {
     let target_account: ContractAddress = contract_address_const::<2>();
 
     let owner_account: ContractAddress = contract_address_const::<
-        0x04337e199aa6a8959aeb2a6afcd2f82609211104191a041e7b9ba2f4039768f0
+        0x04337e199aa6a8959aeb2a6afcd2f82609211104191a041e7b9ba2f4039768f0,
     >();
 
     let balance_before = erc20.balance_of(target_account);
     assert(balance_before == 0, 'Invalid balance');
 
     cheat_caller_address(
-        contract_address, owner_account.try_into().unwrap(), CheatSpan::TargetCalls(1)
+        contract_address, owner_account.try_into().unwrap(), CheatSpan::TargetCalls(1),
     );
 
     let transfer_value: u256 = 100;
@@ -107,11 +107,11 @@ fn test_transfer_event() {
                     contract_address,
                     ERC20Component::Event::Transfer(
                         ERC20Component::Transfer {
-                            from: sender_account, to: target_account, value: transfer_value
-                        }
-                    )
-                )
-            ]
+                            from: sender_account, to: target_account, value: transfer_value,
+                        },
+                    ),
+                ),
+            ],
         );
 }
 
