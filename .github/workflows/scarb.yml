@@ -10,11 +10,11 @@ jobs:
 
       - uses: software-mansion/setup-scarb@v1
         with:
-          scarb-version: "2.9.1"
+          scarb-version: "nightly-2025-02-03"
           scarb-lock: ./Scarb.lock
 
       - uses: foundry-rs/setup-snfoundry@v3
         with:
-          starknet-foundry-version: "0.35.0"
+          starknet-foundry-version: "0.37.0"
 
       - run: snforge test
