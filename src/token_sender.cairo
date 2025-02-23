@@ -1,4 +1,4 @@
-use starknet::{ContractAddress};
+use starknet::ContractAddress;
 
 /// TransferRequest struct
 #[derive(Drop, Serde, Copy)]
@@ -16,33 +16,35 @@ pub trait ITokenSender<TContractState> {
     /// - `token_address` - The address of the token contract
     /// - `transfer_list` - The list of transfers to perform
     fn multisend(
-        self: @TContractState, token_address: ContractAddress, transfer_list: Array<TransferRequest>
+        ref self: TContractState,
+        token_address: ContractAddress,
+        transfer_list: Array<TransferRequest>,
     ) -> ();
 }
 
 #[starknet::contract]
 pub mod TokenSender {
-    use starknet::{get_caller_address, ContractAddress, get_contract_address};
-
-    use crate::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
-
+    use openzeppelin_token::erc20::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
+    use starknet::{ContractAddress, get_caller_address, get_contract_address};
     use super::TransferRequest;
 
 
     #[event]
     #[derive(Drop, starknet::Event)]
-    enum Event {
+    pub enum Event {
         TokensSent: TokensSent,
     }
     #[derive(Drop, starknet::Event)]
-    struct TokensSent {
-        token_address: ContractAddress,
-        recipients: felt252,
+    pub struct TokensSent {
+        #[key]
+        pub recipient: ContractAddress,
+        pub token_address: ContractAddress,
+        pub amount: u256,
     }
 
 
     #[constructor]
-    fn constructor(ref self: ContractState,) {}
+    fn constructor(ref self: ContractState) {}
 
     #[storage]
     struct Storage {}
@@ -50,22 +52,30 @@ pub mod TokenSender {
     #[abi(embed_v0)]
     impl TokenSender of super::ITokenSender<ContractState> {
         fn multisend(
-            self: @ContractState,
+            ref self: ContractState,
             token_address: ContractAddress,
-            transfer_list: Array<TransferRequest>
+            transfer_list: Array<TransferRequest>,
         ) {
-            let erc20 = IERC20Dispatcher { contract_address: token_address };
+            let erc20 = ERC20ABIDispatcher { contract_address: token_address };
 
             let mut total_amount: u256 = 0;
 
             for t in transfer_list.span() {
                 total_amount += *t.amount;
-            };
+            }
 
             erc20.transfer_from(get_caller_address(), get_contract_address(), total_amount);
 
             for t in transfer_list.span() {
                 erc20.transfer(*t.recipient, *t.amount);
+                self
+                    .emit(
+                        TokensSent {
+                            recipient: *t.recipient,
+                            token_address: token_address,
+                            amount: *t.amount,
+                        },
+                    );
             };
         }
     }
