@@ -1,14 +1,9 @@
-use starknet::{contract_address_const, ContractAddress};
-
-
+use openzeppelin_token::erc20::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait, ERC20Component};
 use snforge_std::{
-    declare, cheat_caller_address, ContractClassTrait, CheatSpan, EventSpyAssertionsTrait,
-    DeclareResultTrait, spy_events,
+    CheatSpan, ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait,
+    cheat_caller_address, declare, spy_events,
 };
-
-
-use openzeppelin_token::erc20::ERC20Component;
-use openzeppelin_token::erc20::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
+use starknet::{ContractAddress, contract_address_const};
 
 
 fn setup() -> ContractAddress {

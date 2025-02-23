@@ -1,4 +1,4 @@
-use starknet::{ContractAddress};
+use starknet::ContractAddress;
 
 /// TransferRequest struct
 #[derive(Drop, Serde, Copy)]
@@ -24,10 +24,8 @@ pub trait ITokenSender<TContractState> {
 
 #[starknet::contract]
 pub mod TokenSender {
-    use starknet::{get_caller_address, ContractAddress, get_contract_address};
-
     use openzeppelin_token::erc20::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
-
+    use starknet::{ContractAddress, get_caller_address, get_contract_address};
     use super::TransferRequest;
 
 
@@ -64,7 +62,7 @@ pub mod TokenSender {
 
             for t in transfer_list.span() {
                 total_amount += *t.amount;
-            };
+            }
 
             erc20.transfer_from(get_caller_address(), get_contract_address(), total_amount);
 

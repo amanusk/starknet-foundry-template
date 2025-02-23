@@ -1,15 +1,12 @@
-use starknet::{contract_address_const, ContractAddress};
-
-use snforge_std::{
-    declare, cheat_caller_address, ContractClassTrait, CheatSpan, DeclareResultTrait,
-    EventSpyAssertionsTrait, spy_events, EventSpyTrait, trace::{get_call_trace},
-};
-
-
 use openzeppelin_token::erc20::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
-
+use snforge_std::trace::get_call_trace;
+use snforge_std::{
+    CheatSpan, ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait,
+    cheat_caller_address, declare, spy_events,
+};
+use starknet::{ContractAddress, contract_address_const};
 use token_sender::token_sender::{
-    ITokenSenderDispatcher, ITokenSenderDispatcherTrait, TransferRequest, TokenSender,
+    ITokenSenderDispatcher, ITokenSenderDispatcherTrait, TokenSender, TransferRequest,
 };
 
 const INITIAL_SUPPLY: u256 = 1000000000;
