@@ -1,13 +1,13 @@
-use snforge_std::{declare, cheat_caller_address, ContractClassTrait, CheatSpan, DeclareResultTrait};
-
+use openzeppelin_token::erc20::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
 use snforge_std::trace::get_call_trace;
-
-use starknet::{contract_address_const, ContractAddress};
-
-use token_sender::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
-
-use token_sender::token_sender::{ITokenSenderDispatcher, ITokenSenderDispatcherTrait};
-use token_sender::token_sender::TransferRequest;
+use snforge_std::{
+    CheatSpan, ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait,
+    cheat_caller_address, declare, spy_events,
+};
+use starknet::{ContractAddress, contract_address_const};
+use token_sender::token_sender::{
+    ITokenSenderDispatcher, ITokenSenderDispatcherTrait, TokenSender, TransferRequest,
+};
 
 const INITIAL_SUPPLY: u256 = 1000000000;
 
@@ -37,7 +37,7 @@ fn setup() -> (ContractAddress, ContractAddress) {
 #[test]
 fn test_single_send() {
     let (erc20_address, token_sender_address) = setup();
-    let erc20 = IERC20Dispatcher { contract_address: erc20_address };
+    let erc20 = ERC20ABIDispatcher { contract_address: erc20_address };
 
     let account: ContractAddress = contract_address_const::<1>();
 
@@ -77,7 +77,7 @@ fn test_single_send() {
 #[fuzzer]
 fn test_single_send_fuzz(transfer_value: u256) {
     let (erc20_address, token_sender_address) = setup();
-    let erc20 = IERC20Dispatcher { contract_address: erc20_address };
+    let erc20 = ERC20ABIDispatcher { contract_address: erc20_address };
 
     let account: ContractAddress = contract_address_const::<1>();
 
@@ -100,9 +100,25 @@ fn test_single_send_fuzz(transfer_value: u256) {
     let mut transfer_list = ArrayTrait::<TransferRequest>::new();
     transfer_list.append(request1);
 
+    let mut spy = spy_events();
+
     // need to also prang the token sender
     cheat_caller_address(token_sender_address, account, CheatSpan::TargetCalls(1));
     token_sender.multisend(erc20_address, transfer_list);
+
+    spy
+        .assert_emitted(
+            @array![
+                (
+                    token_sender_address,
+                    TokenSender::Event::TokensSent(
+                        TokenSender::TokensSent {
+                            recipient: dest1, token_address: erc20_address, amount: transfer_value,
+                        },
+                    ),
+                ),
+            ],
+        );
 
     let balance_after = erc20.balance_of(dest1);
     assert(balance_after == transfer_value, 'Balance should be > 0');
@@ -111,7 +127,7 @@ fn test_single_send_fuzz(transfer_value: u256) {
 #[test]
 fn test_multisend() {
     let (erc20_address, token_sender_address) = setup();
-    let erc20 = IERC20Dispatcher { contract_address: erc20_address };
+    let erc20 = ERC20ABIDispatcher { contract_address: erc20_address };
 
     let account: ContractAddress = contract_address_const::<1>();
 
