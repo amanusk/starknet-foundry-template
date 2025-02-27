@@ -1,5 +1,5 @@
 use sncast_std::{
-    declare, deploy, invoke, call, DeclareResult, DeployResult, InvokeResult, CallResult, get_nonce
+    declare, deploy, invoke, call, DeclareResult, DeployResult, InvokeResult, CallResult, get_nonce,
 };
 
 fn main() {
@@ -19,7 +19,7 @@ fn main() {
         Option::Some(salt),
         true,
         Option::Some(max_fee),
-        Option::Some(nonce)
+        Option::Some(nonce),
     )
         .unwrap();
 

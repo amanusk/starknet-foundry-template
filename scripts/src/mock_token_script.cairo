@@ -2,7 +2,7 @@ use sncast_std::{
     declare, deploy, invoke, call, DeclareResult, DeployResult, InvokeResult, CallResult, get_nonce,
 };
 use starknet::{
-    get_caller_address, contract_address_const, ContractAddress, get_contract_address, Into
+    get_caller_address, contract_address_const, ContractAddress, get_contract_address, Into,
 };
 use token_sender::erc20::erc20::{IERC20Dispatcher, IERC20DispatcherTrait};
 
@@ -30,7 +30,7 @@ fn main() {
     let nonce = get_nonce('pending');
     let class_hash = declare_result.class_hash;
     let deploy_result = deploy(
-        class_hash, calldata, Option::Some(salt), true, Option::Some(max_fee), Option::Some(nonce)
+        class_hash, calldata, Option::Some(salt), true, Option::Some(max_fee), Option::Some(nonce),
     )
         .unwrap();
 
@@ -45,12 +45,12 @@ fn main() {
         selector!("transfer"),
         array![account.into(), 0x2, 0x0],
         Option::Some(max_fee),
-        Option::Some(invoke_nonce)
+        Option::Some(invoke_nonce),
     )
         .expect('invoke failed');
 
     println!("Invoke tx hash is: {}", invoke_result.transaction_hash);
-// let erc20 = IERC20Dispatcher { contract_address: deploy_address };
+    // let erc20 = IERC20Dispatcher { contract_address: deploy_address };
 // let transfer_value: u256 = 1;
 // let invoke_res = erc20.transfer(account, transfer_value);
 // k

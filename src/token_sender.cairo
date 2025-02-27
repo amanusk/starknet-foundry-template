@@ -16,7 +16,9 @@ pub trait ITokenSender<TContractState> {
     /// - `token_address` - The address of the token contract
     /// - `transfer_list` - The list of transfers to perform
     fn multisend(
-        self: @TContractState, token_address: ContractAddress, transfer_list: Array<TransferRequest>
+        self: @TContractState,
+        token_address: ContractAddress,
+        transfer_list: Array<TransferRequest>,
     ) -> ();
 }
 
@@ -42,7 +44,7 @@ pub mod TokenSender {
 
 
     #[constructor]
-    fn constructor(ref self: ContractState,) {}
+    fn constructor(ref self: ContractState) {}
 
     #[storage]
     struct Storage {}
@@ -52,7 +54,7 @@ pub mod TokenSender {
         fn multisend(
             self: @ContractState,
             token_address: ContractAddress,
-            transfer_list: Array<TransferRequest>
+            transfer_list: Array<TransferRequest>,
         ) {
             let erc20 = IERC20Dispatcher { contract_address: token_address };
 
