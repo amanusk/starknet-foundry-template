@@ -74,6 +74,7 @@ fn test_single_send() {
 }
 
 #[test]
+#[fuzzer]
 fn test_single_send_fuzz(transfer_value: u256) {
     let (erc20_address, token_sender_address) = setup();
     let erc20 = ERC20ABIDispatcher { contract_address: erc20_address };

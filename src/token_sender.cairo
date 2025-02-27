@@ -62,7 +62,7 @@ pub mod TokenSender {
 
             for t in transfer_list.span() {
                 total_amount += *t.amount;
-            }
+            };
 
             erc20.transfer_from(get_caller_address(), get_contract_address(), total_amount);
 
