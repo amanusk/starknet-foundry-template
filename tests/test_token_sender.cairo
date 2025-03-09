@@ -1,3 +1,4 @@
+use core::num::traits::Pow;
 use openzeppelin_token::erc20::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
 use snforge_std::trace::get_call_trace;
 use snforge_std::{
@@ -13,7 +14,7 @@ const account: ContractAddress = 1.try_into().unwrap();
 const dest1: ContractAddress = 2.try_into().unwrap();
 const dest2: ContractAddress = 3.try_into().unwrap();
 
-const INITIAL_SUPPLY: u256 = 1000000000;
+const INITIAL_SUPPLY: u256 = 10_u256.pow(9);
 
 fn setup() -> (ContractAddress, ContractAddress) {
     let erc20_class_hash = declare("MockERC20").unwrap().contract_class();

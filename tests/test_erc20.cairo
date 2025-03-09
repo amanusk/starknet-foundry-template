@@ -1,3 +1,4 @@
+use core::num::traits::Pow;
 use openzeppelin_token::erc20::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait, ERC20Component};
 use snforge_std::{
     CheatSpan, ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait,
@@ -7,11 +8,11 @@ use starknet::ContractAddress;
 
 const sender_account: ContractAddress = 1.try_into().unwrap();
 const target_account: ContractAddress = 2.try_into().unwrap();
+const INITIAL_SUPPLY: u256 = 10_u256.pow(9);
 
 fn setup() -> ContractAddress {
     let erc20_class_hash = declare("MockERC20").unwrap().contract_class();
 
-    let INITIAL_SUPPLY: u256 = 1000000000;
     let mut calldata = ArrayTrait::new();
     INITIAL_SUPPLY.serialize(ref calldata);
     sender_account.serialize(ref calldata);
@@ -23,7 +24,6 @@ fn setup() -> ContractAddress {
 
 #[test]
 fn test_get_balance() {
-    let INITIAL_SUPPLY: u256 = 1000000000;
     let contract_address = setup();
     let erc20 = ERC20ABIDispatcher { contract_address };
 
@@ -110,7 +110,7 @@ fn should_panic_transfer() {
 
     cheat_caller_address(contract_address, sender_account, CheatSpan::TargetCalls(1));
 
-    let transfer_value: u256 = 1000000001;
+    let transfer_value: u256 = INITIAL_SUPPLY + 1;
 
     erc20.transfer(target_account, transfer_value);
 }
