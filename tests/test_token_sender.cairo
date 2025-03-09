@@ -46,8 +46,8 @@ fn test_single_send() {
     let transfer_value: u256 = 100;
     erc20.approve(token_sender_address, transfer_value * 2);
 
-    assert(
-        erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not set',
+    assert!(
+        erc20.allowance(account, token_sender_address) == transfer_value * 2, "Allowance not set",
     );
 
     let balance_before = erc20.balance_of(account);
@@ -65,7 +65,7 @@ fn test_single_send() {
     token_sender.multisend(erc20_address, transfer_list);
 
     let balance_after = erc20.balance_of(dest1);
-    assert(balance_after == transfer_value, 'Balance should be > 0');
+    assert!(balance_after == transfer_value, "Balance should be > 0");
 
     println!("{}", get_call_trace());
 }
@@ -83,8 +83,8 @@ fn test_single_send_fuzz(transfer_value: u256) {
     let transfer_value: u256 = 100;
     erc20.approve(token_sender_address, transfer_value * 2);
 
-    assert(
-        erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not set',
+    assert!(
+        erc20.allowance(account, token_sender_address) == transfer_value * 2, "Allowance not set",
     );
 
     // Send tokens via multisend
@@ -115,7 +115,7 @@ fn test_single_send_fuzz(transfer_value: u256) {
         );
 
     let balance_after = erc20.balance_of(dest1);
-    assert(balance_after == transfer_value, 'Balance should be > 0');
+    assert!(balance_after == transfer_value, "Balance should be > 0");
 }
 
 #[test]
@@ -123,15 +123,15 @@ fn test_multisend() {
     let (erc20_address, token_sender_address) = setup();
     let erc20 = ERC20ABIDispatcher { contract_address: erc20_address };
 
-    assert(erc20.balance_of(account) == INITIAL_SUPPLY, 'Balance should be > 0');
+    assert!(erc20.balance_of(account) == INITIAL_SUPPLY, "Balance should be > 0");
 
     cheat_caller_address(erc20_address, account, CheatSpan::TargetCalls(1));
 
     let transfer_value: u256 = 100;
     erc20.approve(token_sender_address, transfer_value * 2);
 
-    assert(
-        erc20.allowance(account, token_sender_address) == transfer_value * 2, 'Allowance not set',
+    assert!(
+        erc20.allowance(account, token_sender_address) == transfer_value * 2, "Allowance not set",
     );
 
     let balance = erc20.balance_of(account);
@@ -151,8 +151,8 @@ fn test_multisend() {
     token_sender.multisend(erc20_address, transfer_list);
 
     let balance_after = erc20.balance_of(dest1);
-    assert(balance_after == transfer_value, 'Balance should be > 0');
+    assert!(balance_after == transfer_value, "Balance should be > 0");
     let balance_after = erc20.balance_of(dest2);
-    assert(balance_after == transfer_value, 'Balance should be > 0');
+    assert!(balance_after == transfer_value, "Balance should be > 0");
 }
 
