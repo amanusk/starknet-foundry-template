@@ -12,8 +12,8 @@ casm=false
 
 
 [dependencies]
-openzeppelin_token = "0.20.0"
-starknet = "2.11.0"
+openzeppelin_token = "1.0.0"
+starknet = "2.11.2"
 
 [dev-dependencies]
 snforge_std = "0.38.3"

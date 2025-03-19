@@ -10,10 +10,10 @@ jobs:
 
       - uses: software-mansion/setup-scarb@v1
         with:
-          scarb-version: "2.11.0"
+          scarb-version: "2.11.2"
           scarb-lock: ./Scarb.lock
 
-      - uses: foundry-rs/setup-snfoundry@v3
+      - uses: foundry-rs/setup-snfoundry@v4
         with:
           starknet-foundry-version: "0.38.3"
 
