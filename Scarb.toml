@@ -16,7 +16,7 @@ openzeppelin_token = "1.0.0"
 starknet = "2.11.2"
 
 [dev-dependencies]
-snforge_std = "0.38.3"
+snforge_std = "0.39.0"
 
 [cairo]
 unstable-add-statements-code-locations-debug-info = true
