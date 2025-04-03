@@ -1,11 +1,11 @@
 [sncast.sepolia]
-keystore="/home/amanusk/.starkli-accounts/sepolia/sepolia-braavos.json"
-account="/home/amanusk/.starkli-accounts/sepolia/sepolia-braavos-signer.json"
+keystore="/home/amanusk/.starkli-accounts/sepolia/sepolia-argent-1.json"
+account="/home/amanusk/.starkli-accounts/sepolia/sepolia-argent-1-signer.json"
 network = "sepolia"
-url = "http://192.168.1.45:9235"
+url = "http://192.168.1.45:9235/rpc/v0_8"
 
 [sncast.devnet]
 account="devnet-rs"
-network = "testnet"
+network = "sepolia"
 url = "http://127.0.0.1:5050"
 
