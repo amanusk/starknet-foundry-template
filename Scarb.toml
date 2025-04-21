@@ -2,6 +2,7 @@
 name = "token_sender"
 version = "0.5.0"
 license-file = "LICENSE"
+cairo_version = "2.11.4"
 edition = "2024_07"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifes
@@ -16,7 +17,7 @@ openzeppelin_token = "1.0.0"
 starknet = "2.11.2"
 
 [dev-dependencies]
-snforge_std = "0.39.0"
+snforge_std = "0.41.0"
 
 [cairo]
 unstable-add-statements-code-locations-debug-info = true
@@ -26,7 +27,7 @@ inlining-strategy = "avoid"
 
 [[tool.snforge.fork]]
 name = "SEPOLIA_LATEST"
-url = "https://starknet-sepolia.public.blastapi.io/rpc/v0_7"
+url = "https://starknet-sepolia.public.blastapi.io/rpc/v0_8"
 block_id.tag = "latest"
 
 [tool.scarb]
