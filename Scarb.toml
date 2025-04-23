@@ -19,10 +19,15 @@ starknet = "2.11.2"
 [dev-dependencies]
 snforge_std = "0.41.0"
 
-[cairo]
+[profile.dev.cairo]
 unstable-add-statements-code-locations-debug-info = true
 unstable-add-statements-functions-debug-info = true
-inlining-strategy = "avoid"
+inlining-strategy = 0
+
+[profile.release.cairo]
+unstable-add-statements-code-locations-debug-info = true
+unstable-add-statements-functions-debug-info = true
+inlining-strategy = 0
 
 
 [[tool.snforge.fork]]
