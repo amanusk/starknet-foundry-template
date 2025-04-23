@@ -37,3 +37,5 @@ block_id.tag = "latest"
 
 [tool.scarb]
 allow-prebuilt-plugins = ["snforge_std"]
+
+[lib]
