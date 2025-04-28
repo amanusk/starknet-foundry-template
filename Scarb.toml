@@ -9,7 +9,7 @@ edition = "2024_07"
 
 [[target.starknet-contract]]
 sierra = true
-casm=false
+casm = false
 
 
 [dependencies]
