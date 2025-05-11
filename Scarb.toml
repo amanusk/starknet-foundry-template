@@ -14,7 +14,7 @@ casm = false
 
 [dependencies]
 openzeppelin_token = "1.0.0"
-starknet = "2.11.2"
+starknet = "2.11.4"
 
 [dev-dependencies]
 snforge_std = "0.41.0"
@@ -22,12 +22,10 @@ snforge_std = "0.41.0"
 [profile.dev.cairo]
 unstable-add-statements-code-locations-debug-info = true
 unstable-add-statements-functions-debug-info = true
-inlining-strategy = 0
+inlining-strategy = "avoid"
 
 [profile.release.cairo]
-unstable-add-statements-code-locations-debug-info = true
-unstable-add-statements-functions-debug-info = true
-inlining-strategy = 0
+inlining-strategy = "default"
 
 
 [[tool.snforge.fork]]
