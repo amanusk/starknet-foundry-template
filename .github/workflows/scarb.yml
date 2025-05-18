@@ -15,6 +15,6 @@ jobs:
 
       - uses: foundry-rs/setup-snfoundry@v4
         with:
-          starknet-foundry-version: "0.41.0"
+          starknet-foundry-version: "0.43.0"
 
       - run: snforge test

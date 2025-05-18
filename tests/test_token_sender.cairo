@@ -1,6 +1,5 @@
 use core::num::traits::Pow;
 use openzeppelin_token::erc20::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
-use snforge_std::trace::get_call_trace;
 use snforge_std::{
     CheatSpan, ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait,
     cheat_caller_address, declare, spy_events,
@@ -66,8 +65,6 @@ fn test_single_send() {
 
     let balance_after = erc20.balance_of(dest1);
     assert!(balance_after == transfer_value, "Balance should be > 0");
-
-    println!("{}", get_call_trace());
 }
 
 #[test]
@@ -149,7 +146,6 @@ fn test_multisend() {
     // need to also cheat the token sender
     cheat_caller_address(token_sender_address, account, CheatSpan::TargetCalls(1));
     token_sender.multisend(erc20_address, transfer_list);
-
     let balance_after = erc20.balance_of(dest1);
     assert!(balance_after == transfer_value, "Balance should be > 0");
     let balance_after = erc20.balance_of(dest2);
