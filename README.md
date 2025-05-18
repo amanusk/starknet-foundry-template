@@ -7,7 +7,7 @@ The example shows a simple multi-send contract, receiving an ERC20 address, and 
 This showcases using fork tests and fuzz tests, as well as a simple CI configuration.
 
 - This repo requires `Scarb 2.11.4`
-- This repo requires `sn-foundry 0.41.0`
+- This repo requires `sn-foundry 0.43.0`
 
 Install Scarb with:
 

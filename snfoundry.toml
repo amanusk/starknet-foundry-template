@@ -1,6 +1,18 @@
 [sncast.sepolia]
-keystore="/home/amanusk/.starkli-accounts/sepolia/sepolia-argent-1.json"
-account="/home/amanusk/.starkli-accounts/sepolia/sepolia-argent-1-signer.json"
+account="/home/amanusk/.starkli-accounts/sepolia/sepolia-braavos-5.json"
+keystore="/home/amanusk/.starkli-accounts/sepolia/sepolia-braavos-5-signer.json"
+network = "sepolia"
+url = "http://192.168.1.45:9235/rpc/v0_8"
+
+[sncast.sepolia_argent]
+account="/home/amanusk/.starkli-accounts/sepolia/sepolia-argent-1.json"
+keystore="/home/amanusk/.starkli-accounts/sepolia/sepolia-argent-1-signer.json"
+network = "sepolia"
+url = "http://192.168.1.45:9235/rpc/v0_8"
+
+[sncast.sepolia_oz]
+account="/home/amanusk/.starkli-accounts/sepolia/sepolia-oz-2_0.json"
+keystore="/home/amanusk/.starkli-accounts/sepolia/sepolia-oz-2_0-signer.json"
 network = "sepolia"
 url = "http://192.168.1.45:9235/rpc/v0_8"
 
