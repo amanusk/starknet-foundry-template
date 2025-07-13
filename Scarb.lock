@@ -47,22 +47,22 @@ checksum = "sha256:fd348b31c4a4407add33adc3c2b8f26dca71dbd7431faaf726168f37a91db
 
 [[package]]
 name = "snforge_scarb_plugin"
-version = "0.43.0"
+version = "0.46.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:55ed405cb5f974d0102f2a1cc4ccd27c80152120fac46488581cb8e9e4396979"
+checksum = "sha256:6ffa10fe0ff525678138afd584fc2012e7b248f9c8e7b44aeae033cef3ee7826"
 
 [[package]]
 name = "snforge_std"
-version = "0.43.0"
+version = "0.46.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:8c7f76b40f34c26c83ff851da3ae8bdcb6bfcf0ea3a0d03fe49c3bd67f5e98c6"
+checksum = "sha256:a4d4b4d3e8506a3907d1eabacb058c390aa13a70132f475cba5e3dcd7a60d0bb"
 dependencies = [
  "snforge_scarb_plugin",
 ]
 
 [[package]]
 name = "token_sender"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "openzeppelin_token",
  "snforge_std",
